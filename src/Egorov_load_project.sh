@@ -34,19 +34,6 @@ psql --host $APP_POSTGRES_HOST -U postgres -c '
 psql --host $APP_POSTGRES_HOST -U postgres -c \
     "\\copy t_client FROM '/data/t_client.csv' DELIMITER ',' CSV HEADER"
 
-
-echo "Download t_balance.csv..."
-psql --host $APP_POSTGRES_HOST -U postgres -c '
-  CREATE TABLE IF NOT EXISTS t_balance (
-    report_date  date,
-    account_id  bigint REFERENCES t_account(account_id),
-    acc_value FLOAT
-	
-  );'
-
-psql --host $APP_POSTGRES_HOST -U postgres -c \
-    "\\copy t_balance FROM '/data/t_balance.csv' DELIMITER ',' CSV HEADER"
-
 	
 echo "Download t_account.csv..."
 psql --host $APP_POSTGRES_HOST -U postgres -c '
@@ -60,3 +47,17 @@ CREATE TABLE IF NOT EXISTS t_account (
 
 psql --host $APP_POSTGRES_HOST -U postgres -c \
     "\\copy t_account FROM '/data/t_account.csv' DELIMITER ',' CSV HEADER"
+
+	
+echo "Download t_balance.csv..."
+psql --host $APP_POSTGRES_HOST -U postgres -c '
+  CREATE TABLE IF NOT EXISTS t_balance (
+    report_date  date,
+    account_id  bigint REFERENCES t_account(account_id),
+    acc_value FLOAT
+	
+  );'
+
+psql --host $APP_POSTGRES_HOST -U postgres -c \
+    "\\copy t_balance FROM '/data/t_balance.csv' DELIMITER ',' CSV HEADER"
+	

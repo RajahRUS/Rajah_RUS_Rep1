@@ -39,7 +39,7 @@ echo "Download t_balance.csv..."
 psql --host $APP_POSTGRES_HOST -U postgres -c '
   CREATE TABLE IF NOT EXISTS t_balance (
     report_date  date,
-    account_id  bigint REFERENCES t_balance(account_id),
+    account_id  bigint REFERENCES t_account(account_id),
     acc_value FLOAT
 	
   );'
@@ -50,10 +50,10 @@ psql --host $APP_POSTGRES_HOST -U postgres -c \
 	
 echo "Download t_account.csv..."
 psql --host $APP_POSTGRES_HOST -U postgres -c '
-  CREATE TABLE IF NOT EXISTS t_account (
+CREATE TABLE IF NOT EXISTS t_account (
     account_id  bigint PRIMARY KEY,
-	account_number,
-	account_name,
+	account_number varchar(255),
+	account_name varchar(255),
 	client_id REFERENCES t_client(client_id),
 	departmen_id REFERENCES t_department(department_id)
   );'

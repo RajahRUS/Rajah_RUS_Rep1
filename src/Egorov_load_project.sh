@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS t_account (
     account_id  bigint PRIMARY KEY,
 	account_number varchar(255),
 	account_name varchar(255),
-	client_id REFERENCES t_client(client_id),
-	departmen_id REFERENCES t_department(department_id)
+	client_id bigint REFERENCES t_client(client_id),
+	departmen_id bigint REFERENCES t_department(department_id)
   );'
 
 psql --host $APP_POSTGRES_HOST -U postgres -c \
